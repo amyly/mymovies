@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>All The Movies I've Seen</title>
+		<script type="text/javascript" src="js/raphael.js"></script>
+		<script type="text/javascript" src="js/jquery-1.7.1.min.js"></script>
+		<script type="text/javascript" src="js/data.js"></script>
+		<script type="text/javascript" src="js/mymovies.js"></script>
+		<style type="text/css">
+			a {
+				text-decoration: none;
+				color: #4575B4;
+			}
+			
+			a:hover {
+				text-decoration: underline;
+			}
+			
+			#tip {
+				position: absolute;
+ 				border: 1px solid gray;
+ 				background-color: #efefef;
+ 				padding: 2px;
+ 				z-index: 1000;
+				max-width: 200px;
+				font: 12px sans-serif;
+			}
+
+			#description {
+				position: absolute;
+				left: 50px;
+				top: 45px;
+				//background-color: #efefef;
+				padding: 12px;
+				font: 14px Georgia;
+				width: 700px;
+			}
+			#title {
+				position: absolute;
+				left: 50px;
+				top: 20px;
+				padding: 12px;
+				font: 18px Georgia;
+				font-weight: bold;
+			}
+			
+			#footer {
+				position: absolute;
+				left: 10px;
+				top: 595px;
+				font: 10px sans-serif;
+				color: #333333;
+			}
+		</style>
+	</head>
+	<body>
+		<div id="tip"></div>
+		<div id="canvas_container"></div>
+		<div id="title">All The Movies I've Seen</div>
+		<div id="description">Some time in 2004, I began a list of all the movies I've ever seen. The <a href="http://www.imdb.com/list/YfKD4-8w7mQ/">list</a> lives on <a href="http://imdb.com">IMDB.com</a>, an online movie database. The site allows account holders to rate individual movies on a scale of 1-10, and have that rating be counted towards a user-aggregated average. This visualization is an exploration of all the movies I've ever seen and rated, 579 in all. Each film is represented by a box, the color of which is determined by its rating. This is also my first attempt at creating something in SVG and JavaScript, in particular the <a href="http://raphaeljs.com">Rapha&euml;l</a> and <a href="http://jquery.com">jQuery</a> libraries. Enjoy! Please move your mouse and click around!</div>
+		<div id="footer">Data: <a href="http://www.imdb.com/list/YfKD4-8w7mQ/">IMDB.com</a>
+		<br>Tools: <a href="http://raphaeljs.com">Rapha&euml;l</a>, <a href="http://jquery.com">jQuery</a>, <a href="http://colorbrewer2.org/">ColorBrewer</a></div>
+	</body>
+</html>
