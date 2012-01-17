@@ -9,6 +9,12 @@ window.onload = function() {
 		year_fin = 2012, // last year + 1
 		box_width = (w - xm - xm/2) / (year_fin - year_init); // width of boxes
 	
+	// Sort data by release date
+	data.sort(function(a, b) {
+			var dateA = new Date(a.release_date), dateB = new Date(b.release_date)
+			return dateB-dateA
+		});
+
 	// Assign sub-index for each movie of each year
 	for (var y = 1917; y <= 2011; y++) {
 		var y_index = 0
