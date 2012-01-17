@@ -42,7 +42,7 @@ window.onload = function() {
 				this.style.cursor = 'pointer';
 			};
 			openURL(i);
-			addTip(boxes[i].node, data[i].mtitle + " (" + data[i].year + ") My Rating: " + data[i].my_rating + ", IMDB Rating: " + data[i].imdb_rating);
+			addTip(boxes[i].node, data[i].mtitle + " (" + data[i].year + ")<br>My Rating: " + data[i].my_rating + "<br>IMDB Rating: " + data[i].imdb_rating);
 	}
 	
 	// Open IMDB movie page on click
@@ -55,8 +55,8 @@ window.onload = function() {
 	// Mouse over tool tip
 	$(document).mousemove(function(e){
    		if (over){
-	    	tip.css("left", e.offsetX+20).css("top", e.offsetY+20);
-	    	tip.text(tipText);
+	    	tip.css("left", e.pageX+20).css("top", e.pageY+20);
+	    	tip.html(tipText);
 		}
 	});
 
