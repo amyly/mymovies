@@ -30,29 +30,20 @@ window.onload = function() {
 	// Assign order by my/IMDB rating and year
 	for (var y = 1917; y <= 2011; y++) {
 		var countMy = 0;
-		var countIMDB = 0;
 		for (var r = 1; r < 11; r++) {
 			for (var i in data) {
 				if (data[i].year == y && data[i].my_rating == r) {
 					data[i].myRatingOrder = countMy;
 					countMy++;
 				}
-				if (data[i].year == y && Math.round(data[i].imdb_rating) == r) {
-					data[i].imdbRatingOrder = countIMDB;
-					countIMDB++;
-				}
 			}
 		}
-	}
-
-	// Assign order by year and by IMDB rating
-	for (var y = 1917; y <= 2011; y++) {
-		var count = 0;
-		for (var r = 1; r < 11; r++) {
+		var countIMDB = 0;
+		for (var r = 0; r < 101; r++) {
 			for (var i in data) {
-				if (data[i].year == y && Math.round(data[i].imdb_rating) == r) {
-					data[i].imdbRatingOrder = count;
-					count++;
+				if (data[i].year == y && (10*parseFloat(data[i].imdb_rating)) == r) {
+					data[i].imdbRatingOrder = countIMDB;
+					countIMDB++;
 				}
 			}
 		}
@@ -139,7 +130,7 @@ window.onload = function() {
 
 	// Sort: by release date
 	var sortDate_box = paper.rect(545, 200.5, 18, 18)
-		.attr({fill: '#cde', stroke: '#fff'});
+		.attr({fill: '#4575B4', stroke: '#fff'});
 	sortDate_box.node.onmouseover = function() {
 		this.style.cursor = 'pointer';
 	}
@@ -149,7 +140,7 @@ window.onload = function() {
 		}
 		sortDate_label.attr({fill: '#000'});
 		sortMy_label.attr({fill: '#bdbdbd'});
-		sortDate_box.attr({fill: '#cde'});
+		sortDate_box.attr({fill: '#4575B4'});
 		sortMy_box.attr({fill: '#bdbdbd'});
 		sortIMDB_box.attr({fill: '#bdbdbd'});
 		sortIMDB_label.attr({fill: '#bdbdbd'});
@@ -169,7 +160,7 @@ window.onload = function() {
 		sortDate_label.attr({fill: '#bdbdbd'});
 		sortMy_label.attr({fill: '#000'});
 		sortDate_box.attr({fill: '#bdbdbd'});
-		sortMy_box.attr({fill: '#cde'});
+		sortMy_box.attr({fill: '#4575B4'});
 		sortIMDB_box.attr({fill: '#bdbdbd'});
 		sortIMDB_label.attr({fill: '#bdbdbd'});
 	}
@@ -188,13 +179,13 @@ window.onload = function() {
 		sortMy_label.attr({fill: '#bdbdbd'});
 		sortDate_box.attr({fill: '#bdbdbd'});
 		sortMy_box.attr({fill: '#bdbdbd'});
-		sortIMDB_box.attr({fill: '#cde'});
+		sortIMDB_box.attr({fill: '#4575B4'});
 		sortIMDB_label.attr({fill: '#000'});
 	}
 	
 	// Toggle: my ratings
 	var mybox = paper.rect(75.5, 200.5, 18, 18)
-		.attr({fill: '#cde', stroke: '#fff'});
+		.attr({fill: '#4575B4', stroke: '#fff'});
 	mybox.node.onmouseover = function() {
 		this.style.cursor = 'pointer';
 	}
@@ -210,7 +201,7 @@ window.onload = function() {
 			diffLegend[i].hide();
 			diffLegendTxt[i].hide();
 		}
-		mybox.attr({fill: '#cde', stroke: '#fff'});
+		mybox.attr({fill: '#4575B4', stroke: '#fff'});
 		imdbbox.attr({fill: '#bdbdbd', stroke: '#fff'});
 		diffbox.attr({fill: '#bdbdbd', stroke: '#fff'});
 		mybox_label.attr({fill: '#000'});
@@ -237,7 +228,7 @@ window.onload = function() {
 			diffLegendTxt[i].hide();
 		}
 		mybox.attr({fill: '#bdbdbd', stroke: '#fff'});
-		imdbbox.attr({fill: '#cde', stroke: '#fff'});
+		imdbbox.attr({fill: '#4575B4', stroke: '#fff'});
 		diffbox.attr({fill: '#bdbdbd', stroke: '#fff'});
 		mybox_label.attr({fill: '#bdbdbd'});
 		imdbbox_label.attr({fill: '#000000'});
@@ -277,7 +268,7 @@ window.onload = function() {
 		}
 		mybox.attr({fill: '#bdbdbd', stroke: '#fff'});
 		imdbbox.attr({fill: '#bdbdbd', stroke: '#fff'});
-		diffbox.attr({fill: '#cde', stroke: '#fff'});
+		diffbox.attr({fill: '#4575B4', stroke: '#fff'});
 		mybox_label.attr({fill: '#bdbdbd'});
 		imdbbox_label.attr({fill: '#bdbdbd'});
 		diffbox_label.attr({fill: '#000000'});
