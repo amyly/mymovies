@@ -26,6 +26,45 @@ window.onload = function() {
 		}
 		count = 0;
 	}
+	
+	// Assign order by my/IMDB rating and year
+	for (var y = 1917; y <= 2011; y++) {
+		var countMy = 0;
+		var countIMDB = 0;
+		for (var r = 1; r < 11; r++) {
+			for (var i in data) {
+				if (data[i].year == y && data[i].my_rating == r) {
+					data[i].myRatingOrder = countMy;
+					countMy++;
+				}
+				if (data[i].year == y && Math.round(data[i].imdb_rating) == r) {
+					data[i].imdbRatingOrder = countIMDB;
+					countIMDB++;
+				}
+			}
+		}
+	}
+
+	// Assign order by year and by IMDB rating
+	for (var y = 1917; y <= 2011; y++) {
+		var count = 0;
+		for (var r = 1; r < 11; r++) {
+			for (var i in data) {
+				if (data[i].year == y && Math.round(data[i].imdb_rating) == r) {
+					data[i].imdbRatingOrder = count;
+					count++;
+				}
+			}
+		}
+	}
+
+	// Set X, Y coordinates for each data point
+	for (i in data) {
+		data[i].axisX = ((data[i].year - 1917)* box_width)+ xm;
+		data[i].dateY = (h - ym - (data[i].year_index + 1) * box_width);
+		data[i].myY = (h - ym - (data[i].myRatingOrder + 1) * box_width);
+		data[i].imdbY = (h - ym - (data[i].imdbRatingOrder + 1) * box_width);
+	}
 
 	// Set colors
 	var colors_ratings = ['#A50026', '#D73027', '#F46D43', '#FDAE61', '#FEE090', '#E0F3F8', '#ABD9E9', '#74ADD1', '#4575B4', '#313695'];
@@ -42,7 +81,7 @@ window.onload = function() {
 
 	// Draw boxes
 	for (i in data) {
-			boxes[i] = paper.rect(((data[i].year - 1917)* box_width)+ xm, h - ym - (data[i].year_index + 1) * box_width, box_width, box_width)
+			boxes[i] = paper.rect(data[i].axisX, data[i].dateY, box_width, box_width)
 				.attr({stroke: '#ddd', fill: colors_ratings[data[i].my_rating - 1], stroke: '#fff'});
 			boxes[i].node.onmouseover = function() {
 				this.style.cursor = 'pointer';
@@ -86,8 +125,72 @@ window.onload = function() {
 		.attr({fill: '#bdbdbd', 'text-anchor': 'start', 'font-size': 12});
 	var diffbox_label = paper.text(328, 209, "Difference")
 		.attr({fill: '#bdbdbd', 'text-anchor': 'start', 'font-size': 12});
+	var sortDate_label = paper.text(568, 209, "Release Date")
+		.attr({fill: '#000', 'text-anchor': 'start', 'font-size': 12});
+	var sortMy_label = paper.text(568, 244, "My Ratings")
+		.attr({fill: '#bdbdbd', 'text-anchor': 'start', 'font-size': 12});
+	var sortIMDB_label = paper.text(568, 279, "IMDB Ratings")
+		.attr({fill: '#bdbdbd', 'text-anchor': 'start', 'font-size': 12});
 	paper.text(75, 185, "Toggle Colors")
 		.attr({fill: '#000', 'font-size': 12, 'text-anchor': 'start', 'font-weight': 'bold'})
+	paper.text(545, 185, "Sort Movies By")
+		.attr({fill: '#000', 'font-size': 12, 'text-anchor': 'start', 'font-weight': 'bold'})
+	
+
+	// Sort: by release date
+	var sortDate_box = paper.rect(545, 200.5, 18, 18)
+		.attr({fill: '#cde', stroke: '#fff'});
+	sortDate_box.node.onmouseover = function() {
+		this.style.cursor = 'pointer';
+	}
+	sortDate_box.node.onclick = function () {
+		for (i in data) {
+				boxes[i].animate({x: data[i].axisX, y: data[i].dateY}, 500);				
+		}
+		sortDate_label.attr({fill: '#000'});
+		sortMy_label.attr({fill: '#bdbdbd'});
+		sortDate_box.attr({fill: '#cde'});
+		sortMy_box.attr({fill: '#bdbdbd'});
+		sortIMDB_box.attr({fill: '#bdbdbd'});
+		sortIMDB_label.attr({fill: '#bdbdbd'});
+	}
+
+
+	// Sort: by my ratings
+	var sortMy_box = paper.rect(545, 235.5, 18, 18)
+		.attr({fill: '#bdbdbd', stroke: '#fff'});
+	sortMy_box.node.onmouseover = function() {
+		this.style.cursor = 'pointer';
+	}
+	sortMy_box.node.onclick = function() {
+		for (i in boxes) {
+			boxes[i].animate({x: data[i].axisX, y: data[i].myY}, 500);				
+		}
+		sortDate_label.attr({fill: '#bdbdbd'});
+		sortMy_label.attr({fill: '#000'});
+		sortDate_box.attr({fill: '#bdbdbd'});
+		sortMy_box.attr({fill: '#cde'});
+		sortIMDB_box.attr({fill: '#bdbdbd'});
+		sortIMDB_label.attr({fill: '#bdbdbd'});
+	}
+
+	// Sort: by IMDB ratings
+	var sortIMDB_box = paper.rect(545, 270.5, 18, 18)
+		.attr({fill: '#bdbdbd', stroke: '#fff'});
+	sortIMDB_box.node.onmouseover = function() {
+		this.style.cursor = 'pointer';
+	}
+	sortIMDB_box.node.onclick = function() {
+		for (i in boxes) {
+			boxes[i].animate({x: data[i].axisX, y: data[i].imdbY}, 500);				
+		}
+		sortDate_label.attr({fill: '#bdbdbd'});
+		sortMy_label.attr({fill: '#bdbdbd'});
+		sortDate_box.attr({fill: '#bdbdbd'});
+		sortMy_box.attr({fill: '#bdbdbd'});
+		sortIMDB_box.attr({fill: '#cde'});
+		sortIMDB_label.attr({fill: '#000'});
+	}
 	
 	// Toggle: my ratings
 	var mybox = paper.rect(75.5, 200.5, 18, 18)
