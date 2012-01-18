@@ -13,7 +13,7 @@ window.onload = function() {
 	data.sort(function(a, b) {
 			var dateA = new Date(a.release_date), dateB = new Date(b.release_date)
 			return dateB-dateA
-		});
+	});
 
 	// Assign sub-index for each movie of each year
 	for (var y = 1917; y <= 2011; y++) {
@@ -24,11 +24,6 @@ window.onload = function() {
 				y_index++;
 			}
 		}
-		count = 0;
-	}
-	
-	// Assign order by my/IMDB rating and year
-	for (var y = 1917; y <= 2011; y++) {
 		var countMy = 0;
 		for (var r = 1; r < 11; r++) {
 			for (var i in data) {
@@ -125,9 +120,8 @@ window.onload = function() {
 	paper.text(75, 185, "Toggle Colors")
 		.attr({fill: '#000', 'font-size': 12, 'text-anchor': 'start', 'font-weight': 'bold'})
 	paper.text(545, 185, "Sort Movies By")
-		.attr({fill: '#000', 'font-size': 12, 'text-anchor': 'start', 'font-weight': 'bold'})
+		.attr({fill: '#000', 'font-size': 12, 'text-anchor': 'start', 'font-weight': 'bold'})	
 	
-
 	// Sort: by release date
 	var sortDate_box = paper.rect(545, 200.5, 18, 18)
 		.attr({fill: '#4575B4', stroke: '#fff'});
